@@ -1,0 +1,32 @@
+{
+  "name": "ilivepdf",
+  "version": "1.0.0",
+  "description": "Light-mode PDF tools landing page mockup built with Next.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cantoo/pdf-lib": "^2.8.1",
+    "@napi-rs/canvas": "^1.0.3",
+    "jszip": "^3.10.1",
+    "next": "^16.3.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^6.2.108",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/jszip": "^3.4.0",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.0",
+    "typescript": "^6.0.3"
+  }
+}

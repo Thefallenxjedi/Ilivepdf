@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" role="img" aria-label="iLivePDF">
+  <text
+    x="18"
+    y="78"
+    fill="#152238"
+    font-family="Inter, Arial, Helvetica, sans-serif"
+    font-size="64"
+    font-weight="800"
+  >i</text>
+
+  <path
+    d="M78 18h150c14 0 26 12 26 26v52c0 14-12 26-26 26H78c-14 0-26-12-26-26V44c0-14 12-26 26-26z"
+    fill="#1f6feb"
+  />
+  <path d="M220 18l34 34h-20c-7.7 0-14-6.3-14-14V18z" fill="#d7e6ff" />
+  <text
+    x="104"
+    y="78"
+    fill="#ffffff"
+    font-family="Inter, Arial, Helvetica, sans-serif"
+    font-size="42"
+    font-weight="800"
+  >Live</text>
+
+  <text
+    x="268"
+    y="78"
+    fill="#152238"
+    font-family="Inter, Arial, Helvetica, sans-serif"
+    font-size="64"
+    font-weight="800"
+  >PDF</text>
+</svg>
