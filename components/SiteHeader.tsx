@@ -11,7 +11,7 @@ export function SiteHeader({ activeToolHref }: SiteHeaderProps) {
       <div className="site-header-inner">
         <Link className="brand-link" href="/" aria-label="iLivePDF home">
           <Image
-            src="/ilivepdf-logo.png"
+            src="/ilivepdf-logo.svg"
             alt="iLivePDF"
             width={220}
             height={64}
