@@ -41,26 +41,6 @@ export function SiteHeader({ activeToolHref }: SiteHeaderProps) {
           </Link>
           <Link href="/#tools">All PDF Tools</Link>
         </nav>
-
-        <div className="header-actions">
-          <a className="login-link" href="#login">
-            Login
-          </a>
-          <a className="signup-btn" href="#signup">
-            Sign up
-          </a>
-          <button className="menu-btn" type="button" aria-label="Open menu">
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-            <span className="menu-dot" />
-          </button>
-        </div>
       </div>
     </header>
   );

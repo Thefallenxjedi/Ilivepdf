@@ -18,38 +18,58 @@ function isPng(name: string, bytes: Uint8Array) {
   );
 }
 
+async function imagesToPdf(
+  request: ProcessRequest,
+  mode: "jpg" | "png" | "any",
+): Promise<ProcessResult> {
+  if (!request.files.length) {
+    throw new Error("Upload one or more image files.");
+  }
+
+  const output = await PDFDocument.create();
+
+  for (const file of request.files) {
+    let image;
+    const jpeg = isJpeg(file.name, file.bytes);
+    const png = isPng(file.name, file.bytes);
+
+    if (mode === "jpg" && !jpeg) {
+      throw new Error(`"${file.name}" must be a JPG image.`);
+    }
+    if (mode === "png" && !png) {
+      throw new Error(`"${file.name}" must be a PNG image.`);
+    }
+
+    if (jpeg) {
+      image = await output.embedJpg(file.bytes);
+    } else if (png) {
+      image = await output.embedPng(file.bytes);
+    } else {
+      throw new Error(`Unsupported image type: ${file.name}`);
+    }
+
+    const page = output.addPage([image.width, image.height]);
+    page.drawImage(image, {
+      x: 0,
+      y: 0,
+      width: image.width,
+      height: image.height,
+    });
+  }
+
+  const bytes = await output.save({ useObjectStreams: true });
+  return {
+    files: [{ name: "images.pdf", bytes, mimeType: "application/pdf" }],
+    meta: { pageCount: output.getPageCount() },
+  };
+}
+
 export const jpgToPdfProcessor: Processor = {
   id: "jpg-to-pdf",
-  async process(request: ProcessRequest): Promise<ProcessResult> {
-    if (!request.files.length) {
-      throw new Error("Upload one or more image files.");
-    }
+  process: (request) => imagesToPdf(request, "any"),
+};
 
-    const output = await PDFDocument.create();
-
-    for (const file of request.files) {
-      let image;
-      if (isJpeg(file.name, file.bytes)) {
-        image = await output.embedJpg(file.bytes);
-      } else if (isPng(file.name, file.bytes)) {
-        image = await output.embedPng(file.bytes);
-      } else {
-        throw new Error(`Unsupported image type: ${file.name}`);
-      }
-
-      const page = output.addPage([image.width, image.height]);
-      page.drawImage(image, {
-        x: 0,
-        y: 0,
-        width: image.width,
-        height: image.height,
-      });
-    }
-
-    const bytes = await output.save({ useObjectStreams: true });
-    return {
-      files: [{ name: "images.pdf", bytes, mimeType: "application/pdf" }],
-      meta: { pageCount: output.getPageCount() },
-    };
-  },
+export const pngToPdfProcessor: Processor = {
+  id: "png-to-pdf",
+  process: (request) => imagesToPdf(request, "png"),
 };

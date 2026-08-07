@@ -15,12 +15,28 @@ export type DeletePagesOptions = { ranges: string };
 export type ExtractPagesOptions = { ranges: string };
 export type OrganizeOptions = { order: number[] };
 export type PageNumbersOptions = {
-  position: "bottom-center" | "bottom-right" | "top-center";
+  position:
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
   startFrom: number;
+  format: "numeric" | "roman" | "letter" | "page-label" | "page-of";
+  fontSize: number;
+  skipFirst: boolean;
+  color: string;
+  weight: "regular" | "bold";
 };
 export type WatermarkOptions = {
   text: string;
   opacity: number;
+  pattern: "single" | "diagonal" | "grid";
+  fontSize: number;
+  gapX: number;
+  gapY: number;
+  color: string;
 };
 export type ProtectOptions = {
   password: string;
@@ -29,9 +45,19 @@ export type UnlockOptions = {
   password: string;
 };
 export type JpgToPdfOptions = Record<string, never>;
+export type PngToPdfOptions = Record<string, never>;
 export type PdfToJpgOptions = {
   quality: "balanced" | "high";
 };
+export type PdfToPngOptions = {
+  quality: "balanced" | "high";
+};
+export type ReverseOptions = Record<string, never>;
+export type WordToPdfOptions = Record<string, never>;
+export type PdfToWordOptions = Record<string, never>;
+export type PptToPdfOptions = Record<string, never>;
+export type PdfToPptOptions = Record<string, never>;
+export type MarkdownToPdfOptions = Record<string, never>;
 
 export type ProcessOptions =
   | MergeOptions
@@ -46,7 +72,15 @@ export type ProcessOptions =
   | ProtectOptions
   | UnlockOptions
   | JpgToPdfOptions
-  | PdfToJpgOptions;
+  | PngToPdfOptions
+  | PdfToJpgOptions
+  | PdfToPngOptions
+  | ReverseOptions
+  | WordToPdfOptions
+  | PdfToWordOptions
+  | PptToPdfOptions
+  | PdfToPptOptions
+  | MarkdownToPdfOptions;
 
 export type ProcessRequest = {
   toolId: ToolId;

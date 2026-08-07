@@ -1,16 +1,14 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import { FaqSection } from "@/components/FaqSection";
 import { SiteHeader } from "@/components/SiteHeader";
-import { ToolIcon } from "@/components/ToolIcon";
-import { enabledTools } from "@/config/tools";
+import { ToolCatalog } from "@/components/ToolCatalog";
+import { homeFaqs } from "@/config/faq";
 
-const filters = [
-  "All",
-  "Arrange",
-  "Reduce size",
-  "Mark up",
-  "Secure",
-  "Convert",
-];
+export const metadata: Metadata = {
+  title: "iLivePDF — Free Online PDF Tools to Merge, Compress, Convert & Edit PDF",
+  description:
+    "Free online PDF tools to merge PDF, split PDF, compress PDF, convert PDF, protect PDF, and more. Upload a PDF, finish the task, name your file, and download.",
+};
 
 export default function HomePage() {
   return (
@@ -20,41 +18,17 @@ export default function HomePage() {
       <main className="site-main">
         <section className="hero">
           <p className="hero-brand">iLivePDF</p>
-          <h1>A quieter way to finish document work</h1>
+          <h1>Free online PDF tools that stay clear and calm</h1>
           <p>
-            Upload once, follow one clear path, name your file, and download. Built for
-            calm, trusted PDF workflows — not noisy tool catalogs.
+            Merge PDF, split PDF, compress PDF, convert PDF, and secure PDF files in one
+            trusted path. Upload your PDF, finish the task, name the download, and save —
+            without the noise of a crowded tool dump.
           </p>
         </section>
 
-        <section className="filters" aria-label="Filter tools">
-          {filters.map((filter, index) => (
-            <button
-              key={filter}
-              type="button"
-              className={index === 0 ? "filter-chip is-active" : "filter-chip"}
-            >
-              {filter}
-            </button>
-          ))}
-        </section>
+        <ToolCatalog />
 
-        <section className="tools" id="tools">
-          <div className="tools-grid">
-            {enabledTools.map((tool) => (
-              <Link className="tool-card tool-card-link" href={tool.href} key={tool.id}>
-                <ToolIcon
-                  variant={tool.iconVariant}
-                  color={tool.iconColor}
-                  mark={tool.iconMark}
-                  title={tool.name}
-                />
-                <h2>{tool.name}</h2>
-                <p>{tool.detail}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <FaqSection title="PDF FAQ" items={homeFaqs} />
       </main>
     </div>
   );

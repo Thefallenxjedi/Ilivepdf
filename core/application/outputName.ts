@@ -48,9 +48,21 @@ export function defaultOutputBaseName(toolId: string, files: File[]) {
     case "unlock-pdf":
       return `${safeFirst}-unlocked`;
     case "jpg-to-pdf":
+    case "png-to-pdf":
       return files.length > 1 ? "images" : safeFirst;
     case "pdf-to-jpg":
+    case "pdf-to-png":
       return `${safeFirst}-images`;
+    case "reverse-pdf":
+      return `${safeFirst}-reversed`;
+    case "word-to-pdf":
+    case "ppt-to-pdf":
+    case "markdown-to-pdf":
+      return safeFirst;
+    case "pdf-to-word":
+      return `${safeFirst}-word`;
+    case "pdf-to-ppt":
+      return `${safeFirst}-slides`;
     default:
       return safeFirst;
   }
@@ -69,6 +81,10 @@ export function resolveDownloadName(
   if (!extension) {
     if (contentType.includes("zip")) extension = ".zip";
     else if (contentType.includes("jpeg") || contentType.includes("jpg")) extension = ".jpg";
+    else if (contentType.includes("png")) extension = ".png";
+    else if (contentType.includes("wordprocessingml") || contentType.includes("msword")) {
+      extension = ".docx";
+    } else if (contentType.includes("presentationml")) extension = ".pptx";
     else extension = ".pdf";
   }
 
